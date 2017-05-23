@@ -1,0 +1,18 @@
+# Defines application language and version
+language: php
+php:
+  - '5.6'
+  - '7.0'
+
+# Installs required dependencies
+install:
+  - composer install
+  - composer dump
+
+# Defines build script
+script:
+  - vendor/bin/phpunit tests --coverage-clover build/logs/clover.xml
+
+# Sends data to coveralls
+after_success:
+  - travis_retry php vendor/bin/coveralls -v

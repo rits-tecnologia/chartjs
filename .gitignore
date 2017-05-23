@@ -1,0 +1,9 @@
+# Folders
+build/
+reports/
+vendor/
+
+# Files
+.php_cs.cache
+composer.lock
+composer.phar

@@ -1,0 +1,23 @@
+{
+    "name": "rits/chartjs",
+    "description": "PHP wrapper for charts libraries",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucas Ferreira",
+            "email": "lucasferreira@rits.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rits\\ChartJS\\": "src/Rits/ChartJS"
+        }
+    },
+    "require": {
+        "php": "^7.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1"
+    }
+}
