@@ -112,7 +112,7 @@ abstract class Chart
         $parameters = $this->buildParameters();
 
         foreach ($parameters as $key => $value) {
-            array_push($htmlParts, sprintf('%s="%s"', $key, $value));
+            array_push($htmlParts, sprintf("%s='%s'", $key, $value));
         }
 
         return implode(' ', $htmlParts);
