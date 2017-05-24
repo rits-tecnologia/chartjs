@@ -43,6 +43,6 @@ class LineChart extends Chart
      */
     protected function replacementColors(): array
     {
-        return ['pointHighlightFill' => 'point', 'pointHighlightStroke' => 'pointStroke'];
+        return ['background' => 'fill', 'pointHighlightFill' => 'point', 'pointHighlightStroke' => 'pointStroke'];
     }
 }

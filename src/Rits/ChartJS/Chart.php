@@ -2,6 +2,8 @@
 
 namespace Rits\ChartJS;
 
+use InvalidArgumentException;
+
 abstract class Chart
 {
     /**
@@ -66,7 +68,7 @@ abstract class Chart
      * @var array
      */
     protected $colors = [
-        ['fill' => 'rgba(220,220,220,0.2)', 'stroke' => 'rgba(220,220,220,1)', 'point' => 'rgba(220,220,220,1)', 'pointStroke' => '#fff'],
+        ['fill' => 'rgba(26,179,148,0.5)', 'stroke' => 'rgba(26,179,148,0.7)', 'point' => 'rgba(26,179,148,1)', 'pointStroke' => '#fff'],
         ['fill' => 'rgba(0,0,0,0.2)', 'stroke' => 'rgba(0,0,0,1)', 'point' => 'rgba(0,0,0,1)', 'pointStroke' => '#000'],
     ];
 
@@ -133,6 +135,53 @@ abstract class Chart
             'data-options' => json_encode($this->options),
             'data-data' => json_encode($this->getCompleteDataSets()),
         ], $this->attributes);
+    }
+
+    /**
+     * Add a new color to the colors array.
+     *
+     * @param array $colors
+     * @return Chart
+     */
+    public function addColors(array $colors): Chart
+    {
+        if (
+            ! (
+                array_key_exists('fill', $colors) &&
+                array_key_exists('stroke', $colors) &&
+                array_key_exists('point', $colors) &&
+                array_key_exists('pointStroke', $colors)
+            )
+        ) {
+            throw new InvalidArgumentException('You must fill all colors.', E_USER_WARNING);
+        }
+
+        array_push($this->colors, $colors);
+
+        return $this;
+    }
+
+    /**
+     * Set colors array.
+     *
+     * @param array $colorsList
+     * @return Chart
+     */
+    public function setColors(array $colorsList): Chart
+    {
+        $backup = $this->colors;
+        $this->colors = [];
+
+        try {
+            foreach ($colorsList as $colors) {
+                $this->addColors($colors);
+            }
+        } catch (InvalidArgumentException $e) {
+            $this->colors = $backup;
+            throw $e;
+        }
+
+        return $this;
     }
 
     /**
